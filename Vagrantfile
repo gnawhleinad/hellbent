@@ -59,12 +59,14 @@ service apache2 restart
 ./checksetup.pl && \
 sed -i 's/^\\(\\$webservergroup\\s*=\\s*\\).*\$/\\1'\\''www-data'\\'';/' localconfig && \
 sed -i 's/^\\(\\$db_pass\\s*=\\s*\\).*\$/\\1'\\''bugs'\\'';/' localconfig)
+cd /var/www/html
 cat > answers << ANSWERS
 \\$answer{'ADMIN_EMAIL'} = 'bugs@hellbent.local';
 \\$answer{'ADMIN_PASSWORD'} = 'hellbent';
 \\$answer{'ADMIN_REALNAME'} = 'hellbent';
 \\$answer{'NO_PAUSE'} = 1;
 ANSWERS
+cd -
 (cd /var/www/html && ./checksetup.pl answers)
 SCRIPT
 
